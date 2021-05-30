@@ -8,8 +8,18 @@ import java.io.OutputStream;
 
 public abstract class Foc {
 
+    /**
+     * Remove file-object. Throws exception on failure
+     * @return true if removed
+     * @throws IOException
+     * @throws SecurityException
+     */
     public abstract boolean remove() throws IOException, SecurityException;
 
+    /**
+     * Remove file-object. Returns false on failure
+     * @return true if removed, false if failed to remove
+     */
     public boolean rm() {
         try {
             return remove();
@@ -18,12 +28,19 @@ public abstract class Foc {
         }
     }
 
+    /**
+     * Remove directory if file-object is a directory
+     * @return true if removed, false if failed to remove
+     */
     public boolean rmdir() {
         return isDir() && rm();
     }
 
 
-
+    /**
+     * Remove directory and all child directories. Continues on failure. Does not remove any non-directories.
+     * @return true if all directories are removed. False if failed to remove at least one directory
+     */
     public boolean rmdirs() {
         final boolean[] ok = {true};
 
@@ -38,6 +55,10 @@ public abstract class Foc {
         return ok[0] && rmdir();
     }
 
+    /**
+     * Try to remove all child file-objects including this file-object. Continues if it fails to remove a file-object.
+     * @return true if all file-objects are removed. False if failed to remove at least one file-object.
+     */
     public boolean rmRecoursive() {
         final boolean[] ok = {true};
 
@@ -53,32 +74,63 @@ public abstract class Foc {
     }
 
 
-
+    /**
+     * Create a sub directory.
+     * @return True on success. False on failure.
+     */
     public abstract boolean mkdir();
 
+    /**
+     * Creates all parent directories and this directory
+     * @return true if this is an existing directory. False if this is a file-object or if this does not exist.
+     */
     public boolean mkdirs() {
         return isDir() || (mkParents() && mkdir());
     }
 
+    /**
+     * Creates all parent directories
+     * @return true if parent directory exists. False if parent is not a directory or does not exist.
+     */
     public boolean mkParents() {
         Foc parent = parent();
         return parent != null && parent.mkdirs();
     }
 
+    /**
+     * Check if this file-object has a parent object or if this is a root-object. The parent object
+     * can not exist or not.
+     * @return true if this object has a logical parent object.
+     */
     public boolean hasParent() {
         return parent() != null;
     }
 
+    /**
+     * Get logical parent object in path hierarchy.
+     * @return return parent or null if there is no parent
+     */
     public abstract Foc parent();
 
 
-
+    /**
+     * Move file-object to target path. Throws exception on failure.
+     * @param target New path of this file-object including name of new file-object.
+     * @return true on success
+     * @throws IOException
+     * @throws SecurityException
+     */
     public boolean move(Foc target) throws IOException , SecurityException {
         copy(target);
         return  remove();
     }
 
 
+    /**
+     * Move file-object to target path. Returns false on failure
+     * @param target New path of this file-object including name of new file-object.
+     * @return true on success, false on failure
+     */
     public boolean mv(Foc target) {
         try {
             return move(target);
@@ -88,6 +140,11 @@ public abstract class Foc {
     }
 
 
+    /**
+     * Copy file-object ot target path. Returns false on failure.
+     * @param copy Path of copied file-object including name.
+     * @return true on success, false on failure
+     */
     public boolean cp(Foc copy) {
         try {
             copy(copy);
@@ -99,6 +156,10 @@ public abstract class Foc {
     }
 
 
+    /**
+     * Copy file-object ot target path. Throws exception on failure.
+     * @param copy Path of copied file-object including name.
+     */
     public void copy(Foc copy) throws IOException, SecurityException {
         OutputStream out = null;
         InputStream in = null;
