@@ -1,0 +1,3 @@
+include ':foc-android'
+include ':foc'
+

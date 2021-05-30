@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import ch.bailu.util.Objects;
 
 public abstract class Foc {
 
@@ -187,10 +186,16 @@ public abstract class Foc {
 
     @Override
     public boolean equals(Object o)  {
-        return o instanceof Foc && Objects.equals(getPath(), ((Foc) o).getPath());
+        return o instanceof Foc && equals(getPath(), ((Foc) o).getPath());
 
     }
 
+    private static boolean equals(Object a, Object b) {
+        if (a != null && b!= null) {
+            return a.equals(b);
+        }
+        return a == b;
+    }
 
     @Override
     public String toString() {
