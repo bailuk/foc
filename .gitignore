@@ -1,0 +1,62 @@
+# Built application files
+*.apk
+*.ap_
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log Files
+*.log
+
+# Android Studio, Intellij and Gradle 
+*.iml
+.idea
+.gradle
+build/
+.navigation
+captures/
+output.json
+
+# Eclipse
+proguard/
+.metadata/
+
+
+# External native build folder generated in Android Studio 2.2 and later
+obj/
+.externalNativeBuild
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Freeline
+freeline.py
+freeline/
+freeline_project_description.json
+
+# built native files (uncomment if you build your own)
+*.o
+*.so
+
+# Mac OS X / Windows
+*.DS_Store
+Thumbs.db
+
+
+# Visual Studio code
+.classpath
+.project
+.settings/
+
