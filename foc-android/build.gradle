@@ -39,7 +39,6 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':foc')
     implementation 'androidx.annotation:annotation:1.1.0'
 }
