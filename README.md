@@ -1,16 +1,18 @@
+[![Android CI](https://github.com/bailuk/foc/actions/workflows/android.yml/badge.svg)](https://github.com/bailuk/foc/actions/workflows/android.yml)
+
 # foc
 File or content - abstraction for file like objects
 
 
-# Build
+## Build
 ```bash
 export ANDROID_SDK_ROOT=/home/user/Android/Sdk
 ./gradelw build
 ./gradlew publishToMavenLocal
 ```
 
-# Integrate into project with [Gradle](https://gradle.org)
-## Add jitpack.io repository
+## Integrate into project with [Gradle](https://gradle.org)
+### Add jitpack.io repository
 ```gradle
 repositories {
     // ...
@@ -18,7 +20,7 @@ repositories {
 }
 ```
 
-## Add dependency
+### Add dependency
 ```gradle
 dependencies {
     def focVersion = '1.1'
