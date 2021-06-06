@@ -1,4 +1,22 @@
+// https://docs.gradle.org/current/userguide/publishing_maven.html
+// https://docs.gradle.org/current/userguide/publishing_setup.html
+
+
 apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+
+group = 'ch.bailu'
+version = '1.0'
+
+
+publishing {
+    publications {
+        myLibrary(MavenPublication) {
+            from components.java
+        }
+    }
+}
 
 
 sourceCompatibility = "1.8"

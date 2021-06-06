@@ -1,6 +1,5 @@
 
 buildscript {
-
     repositories {
         google()
         jcenter()
@@ -11,7 +10,10 @@ buildscript {
     }
 }
 
+
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
 
 android {
     compileSdkVersion 30
@@ -38,9 +40,31 @@ repositories {
     jcenter()
 }
 
+
 dependencies {
     implementation project(path: ':foc')
     implementation 'androidx.annotation:annotation:1.1.0'
+}
+
+
+group = 'ch.bailu'
+version = '1.0'
+
+
+
+
+// Because the components are created only during the afterEvaluate phase, you must
+// configure your publications using the afterEvaluate() lifecycle method.
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+            }
+        }
+    }
 }
 
 sourceCompatibility = "1.8"
