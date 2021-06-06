@@ -2,7 +2,7 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -17,13 +17,13 @@ apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 30
-        versionCode 1
-        versionName "v1.0"
+        versionCode = project.versionCode
+        versionName = project.version
 
     }
 
@@ -37,22 +37,22 @@ android {
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 
 dependencies {
     implementation project(path: ':foc')
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.annotation:annotation:1.2.0'
 }
 
 
 group = 'ch.bailu'
-version = '1.0'
+version = project.version
 
 
 
-
+// https://developer.android.com/studio/build/maven-publish-plugin
 // Because the components are created only during the afterEvaluate phase, you must
 // configure your publications using the afterEvaluate() lifecycle method.
 afterEvaluate {

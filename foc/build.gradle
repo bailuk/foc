@@ -7,7 +7,7 @@ apply plugin: 'maven-publish'
 
 
 group = 'ch.bailu'
-version = '1.0'
+version = project.version
 
 
 publishing {
