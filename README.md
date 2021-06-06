@@ -24,13 +24,13 @@ dependencies {
     def focVersion = '1.1'
 
     // all modules
-    implementation 'com.github.bailuk:foc:$focVersion'
+    implementation "com.github.bailuk:foc:$focVersion"
 
     // foc module
-    // implementation 'com.github.bailuk.foc:foc:$focVersion'
+    // implementation "com.github.bailuk.foc:foc:$focVersion"
 
     // foc-android module
-    // implementation 'com.github.bailuk.foc:foc-android:$focVersion'
+    // implementation "com.github.bailuk.foc:foc-android:$focVersion"
 }
 ```
 
