@@ -18,7 +18,7 @@ public abstract class Foc {
 
     /**
      * Remove file-object. Returns false on failure
-     * @return true if removed, false if failed to remove
+     * @return true if removed
      */
     public boolean rm() {
         try {
@@ -30,7 +30,7 @@ public abstract class Foc {
 
     /**
      * Remove directory if file-object is a directory
-     * @return true if removed, false if failed to remove
+     * @return true if removed
      */
     public boolean rmdir() {
         return isDir() && rm();
