@@ -286,8 +286,6 @@ public class FocContent extends Foc {
                 data = new DocumentData(cursor);
 
             } else {
-                //AppLog.d(this, uris.getDocument().toString());
-
                 data = new DocumentData(uris.getDocumentId().toString());
             }
 
