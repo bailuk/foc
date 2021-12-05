@@ -82,28 +82,28 @@ public class FocFile extends Foc {
 
 
     @Override
-    public void foreach(final Execute e) {
+    public void foreach(final OnHaveFoc onHaveFoc) {
         file.listFiles(file -> {
-            e.execute(new FocFile(file));
+            onHaveFoc.run(new FocFile(file));
             return false;
         });
     }
 
     @Override
-    public void foreachFile(final Execute e) {
+    public void foreachFile(final OnHaveFoc onHaveFoc) {
         file.listFiles(file -> {
             if (file.isFile())
-                e.execute(new FocFile(file));
+                onHaveFoc.run(new FocFile(file));
             return false;
         });
     }
 
 
     @Override
-    public void foreachDir(final Execute e) {
+    public void foreachDir(final OnHaveFoc onHaveFoc) {
         file.listFiles(file -> {
             if (file.isDirectory())
-                e.execute(new FocFile(file));
+                onHaveFoc.run(new FocFile(file));
             return false;
         });
     }
