@@ -23,7 +23,7 @@ repositories {
 ### Add dependency
 ```gradle
 dependencies {
-    def focVersion = '1.1'
+    def focVersion = '1.2'
 
     // all modules
     implementation "com.github.bailuk:foc:$focVersion"
