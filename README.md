@@ -1,7 +1,11 @@
 [![Android CI](https://github.com/bailuk/foc/actions/workflows/android.yml/badge.svg)](https://github.com/bailuk/foc/actions/workflows/android.yml)
 
-# foc
-File or content - abstraction for file like objects
+# foc - file or content
+A java library providing a platform independent abstraction for file like objects. 
+It supports the following types: 
+- Unix and Windows filesystems trough [Java File](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html) 
+- Android Storage Access Framework - [SAF](https://developer.android.com/guide/topics/providers/document-provider)
+- Android [Assets](https://developer.android.com/reference/android/content/res/AssetManager)
 
 
 ## Build
@@ -37,6 +41,7 @@ dependencies {
 ```
 
 See [jitpack.io](http://jitpack.io) for more.
+
 
 ## Example
 ```java
@@ -78,7 +83,9 @@ public class ExampleActivity extends Activity {
     }
 
     private void printFiles(Foc foc) {
-        if (foc.isFile()) {
+        System.out.println(foc.getName());
+
+        if (foc.isFile() && foc.canRead()) {
             InputStream reader = null;
             try {
                 reader = foc.openR();

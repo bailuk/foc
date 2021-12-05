@@ -36,7 +36,6 @@ public class FocUri extends Foc {
 
     @Override
     public Foc child(String name) {
-
         return new FocUri(resolver, Uri.parse(this.toString() + "/" + name));
     }
 
