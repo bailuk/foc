@@ -1,4 +1,4 @@
-[![Android CI](https://github.com/bailuk/foc/actions/workflows/android.yml/badge.svg)](https://github.com/bailuk/foc/actions/workflows/android.yml)
+[![Android CI](https://github.com/bailuk/foc/actions/workflows/android.yml/badge.svg)](https://github.com/bailuk/foc/actions/workflows/android.yml) [![Release](https://jitpack.io/v/com.github.bailuk/foc.svg)](https://jitpack.io/#com.github.bailuk/foc)
 
 # foc - file or content
 A java library providing a platform independent abstraction for file like objects. 
