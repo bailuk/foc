@@ -15,12 +15,12 @@ public class FocAsset extends Foc {
     private final AssetManager manager;
 
     private String[] children = new String[0];
-    private Boolean isDirectory = null;
-    private Boolean isFile = null;
+    private final Check isDirectory = new Check();
+    private final Check isFile = new Check();
 
-    public FocAsset(AssetManager m, String a) {
-        manager = m;
-        asset = a;
+    public FocAsset(AssetManager manager, String assetPath) {
+        this.manager = manager;
+        this.asset = assetPath;
     }
 
 
@@ -70,33 +70,27 @@ public class FocAsset extends Foc {
     }
 
     @Override
-    public void foreach(Execute e) {
+    public void foreach(OnHaveFoc onHaveFoc) {
         checkAndLoadDirectory();
         for (String child : children) {
-            e.execute(child(child));
+            onHaveFoc.run(child(child));
         }
     }
 
     @Override
-    public void foreachFile(Execute e) {
-        foreach(new Execute() {
-            @Override
-            public void execute(Foc child) {
-                if (child.isFile()) {
-                    e.execute(child);
-                }
+    public void foreachFile(OnHaveFoc onHaveFoc) {
+        foreach(child -> {
+            if (child.isFile()) {
+               onHaveFoc.run(child);
             }
         });
     }
 
     @Override
-    public void foreachDir(Execute e) {
-        foreach(new Execute() {
-            @Override
-            public void execute(Foc child) {
-                if (child.isDir()) {
-                    e.execute(child);
-                }
+    public void foreachDir(OnHaveFoc onHaveFoc) {
+        foreach(child -> {
+            if (child.isDir()) {
+               onHaveFoc.run(child);
             }
         });
     }
@@ -104,13 +98,13 @@ public class FocAsset extends Foc {
     @Override
     public boolean isDir() {
         checkAndLoadDirectory();
-        return isDirectory.booleanValue();
+        return isDirectory.get();
     }
 
     @Override
     public boolean isFile() {
         checkIsFile();
-        return isFile.booleanValue();
+        return isFile.get();
     }
 
     @Override
@@ -120,7 +114,7 @@ public class FocAsset extends Foc {
 
     @Override
     public boolean canRead() {
-        return isFile();
+        return exists();
     }
 
     @Override
@@ -139,14 +133,14 @@ public class FocAsset extends Foc {
     }
 
     private void checkIsFile() {
-        if (isFile == null) {
+        if (!isFile.isSet()) {
             InputStream toClose = null;
             try {
                 toClose = openR();
-                isFile = Boolean.TRUE;
-                isDirectory = Boolean.FALSE;
+                isFile.set(true);
+                isDirectory.set(false);
             } catch (Exception e) {
-                isFile = Boolean.FALSE;
+                isFile.set(false);
             } finally {
                 close(toClose);
             }
@@ -154,15 +148,33 @@ public class FocAsset extends Foc {
     }
 
     private void checkAndLoadDirectory() {
-        if (isDirectory == null) {
+        checkIsFile();
+        if (!isDirectory.isSet()) {
             try {
                 children = manager.list(asset);
-                isDirectory = Boolean.TRUE;
-                isFile = Boolean.FALSE;
+                isDirectory.set(true);
             } catch (IOException e) {
                 children = new String[0];
-                isDirectory = Boolean.FALSE;
+                isDirectory.set(false);
             }
+        }
+    }
+
+    private static class Check {
+        private Boolean check = null;
+
+        public void set(boolean b) {
+            if (check == null) {
+                check = b;
+            }
+        }
+
+        public boolean get() {
+            return (check != null && check.booleanValue());
+        }
+
+        public  boolean isSet() {
+            return check != null;
         }
     }
 }
