@@ -16,9 +16,9 @@ public class FocTest {
 
     public void rlog() {
         log();
-        file.foreach(new Foc.Execute() {
+        file.foreach(new Foc.OnHaveFoc() {
             @Override
-            public void execute(Foc child) {
+            public void OnHaveFoc(Foc child) {
                 new FocTest(child).rlog();
             }
         });

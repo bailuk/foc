@@ -143,7 +143,7 @@ public class FocContent extends Foc {
 
 
     @Override
-    public void foreach(Execute exec) {
+    public void foreach(OnHaveFoc onHaveFoc) {
         if (isFile()) return;
 
         Cursor cursor = null;
@@ -152,7 +152,7 @@ public class FocContent extends Foc {
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     DocumentData data = new DocumentData(cursor);
-                    exec.execute(new FocContent(resolver, uris.child(new DocumentId(data.documentId)), data));
+                    onHaveFoc.run(new FocContent(resolver, uris.child(new DocumentId(data.documentId)), data));
 
                 } while (cursor.moveToNext());
             }
@@ -164,10 +164,10 @@ public class FocContent extends Foc {
     }
 
 
-    private static class ChildCount extends Execute {
+    private static class ChildCount implements OnHaveFoc {
         public int count = 0;
         @Override
-        public void execute(Foc child) {
+        public void run(Foc child) {
             count++;
         }
     }
@@ -181,22 +181,16 @@ public class FocContent extends Foc {
 
 
     @Override
-    public void foreachFile(final Execute e) {
-        foreach(new Execute() {
-            @Override
-            public void execute(Foc child) {
-                if (child.isFile()) e.execute(child);
-            }
+    public void foreachFile(final OnHaveFoc onHaveFoc) {
+        foreach(child -> {
+            if (child.isFile()) onHaveFoc.run(child);
         });
     }
 
     @Override
-    public void foreachDir(final Execute e) {
-        foreach(new Execute() {
-            @Override
-            public void execute(Foc child) {
-                if (child.isDir()) e.execute(child);
-            }
+    public void foreachDir(final OnHaveFoc onHaveFoc) {
+        foreach(child -> {
+            if (child.isDir()) onHaveFoc.run(child);
         });
 
     }

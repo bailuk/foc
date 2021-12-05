@@ -44,12 +44,9 @@ public abstract class Foc {
     public boolean rmdirs() {
         final boolean[] ok = {true};
 
-        foreachDir(new Execute() {
-            @Override
-            public void execute(Foc child) {
-                if (!child.rmdirs()) {
-                    ok[0] = false;
-                }
+        foreachDir(child -> {
+            if (!child.rmdirs()) {
+                ok[0] = false;
             }
         });
         return ok[0] && rmdir();
@@ -62,12 +59,9 @@ public abstract class Foc {
     public boolean rmRecoursive() {
         final boolean[] ok = {true};
 
-        foreach(new Execute() {
-            @Override
-            public void execute(Foc child) {
-                if (!child.rmRecoursive()) {
-                    ok[0] = false;
-                }
+        foreach(child -> {
+            if (!child.rmRecoursive()) {
+                ok[0] = false;
             }
         });
         return ok[0] && rm();
@@ -208,13 +202,13 @@ public abstract class Foc {
         return getPath();
     }
 
-    public abstract static class Execute {
-        public abstract void execute(Foc child);
+    public interface OnHaveFoc {
+        void run(Foc child);
     }
 
-    public abstract void foreach(Execute e);
-    public abstract void foreachFile(Execute e);
-    public abstract void foreachDir(Execute e);
+    public abstract void foreach(OnHaveFoc onHaveFoc);
+    public abstract void foreachFile(OnHaveFoc onHaveFoc);
+    public abstract void foreachDir(OnHaveFoc onHaveFoc);
 
 
     public abstract boolean isDir();

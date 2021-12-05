@@ -57,17 +57,17 @@ public class FocUri extends Foc {
 
 
     @Override
-    public void foreach(Execute e) {
+    public void foreach(OnHaveFoc onHaveFoc) {
 
     }
 
     @Override
-    public void foreachFile(Execute e) {
+    public void foreachFile(OnHaveFoc onHaveFoc) {
 
     }
 
     @Override
-    public void foreachDir(Execute e) {
+    public void foreachDir(OnHaveFoc onHaveFoc) {
 
     }
 
