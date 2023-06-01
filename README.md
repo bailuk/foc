@@ -32,10 +32,13 @@ dependencies {
     // all modules
     implementation "com.github.bailuk:foc:$focVersion"
 
-    // foc module
+    // foc (core module)
     // implementation "com.github.bailuk.foc:foc:$focVersion"
 
-    // foc-android module
+    // foc-extended (for accessing java resources)
+    // implementation "com.github.bailuk.foc:foc-android:$focVersion"
+
+    // foc-android (Android Storage Access Framework SAF)
     // implementation "com.github.bailuk.foc:foc-android:$focVersion"
 }
 ```

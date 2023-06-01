@@ -1,2 +1,3 @@
 include ':foc-android'
+include ':foc-extended'
 include ':foc'

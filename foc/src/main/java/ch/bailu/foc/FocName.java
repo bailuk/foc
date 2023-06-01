@@ -2,7 +2,6 @@ package ch.bailu.foc;
 
 public class FocName extends FocAbstractName {
 
-
     private final String name;
 
     public FocName(String n) {
@@ -23,7 +22,4 @@ public class FocName extends FocAbstractName {
     public String getPath() {
         return name;
     }
-
-
-
 }

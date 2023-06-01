@@ -4,9 +4,12 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 
 public abstract class Foc {
+
+    public static final Foc FOC_NULL = new FocName("");
 
     /**
      * Remove file-object. Throws exception on failure
@@ -169,7 +172,6 @@ public abstract class Foc {
         }
     }
 
-
     private static void copy(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[4096];
         int count;
@@ -177,7 +179,6 @@ public abstract class Foc {
             out.write(buffer,0,count);
         }
     }
-
 
     public Foc descendant(String path) {
         Foc descendant = this;
@@ -202,6 +203,7 @@ public abstract class Foc {
         return getPath();
     }
 
+    @FunctionalInterface
     public interface OnHaveFoc {
         void run(Foc child);
     }
@@ -238,18 +240,10 @@ public abstract class Foc {
         }
     }
 
-
     @Override
-    public boolean equals(Object o)  {
-        return o instanceof Foc && equals(getPath(), ((Foc) o).getPath());
+    public boolean equals(Object other)  {
+        return other instanceof Foc && Objects.equals(getPath(), ((Foc) other).getPath());
 
-    }
-
-    private static boolean equals(Object a, Object b) {
-        if (a != null && b!= null) {
-            return a.equals(b);
-        }
-        return a == b;
     }
 
     @Override
@@ -257,10 +251,8 @@ public abstract class Foc {
         return getPath();
     }
 
-
     @Override
     public int hashCode() {
         return getPath().hashCode();
     }
-
 }
