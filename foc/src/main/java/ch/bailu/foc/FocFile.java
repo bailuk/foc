@@ -8,9 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class FocFile extends Foc {
-
     private final File file;
-
 
     public FocFile(String f) {
         file = new File(f);
@@ -19,12 +17,10 @@ public class FocFile extends Foc {
         file = f;
     }
 
-
     @Override
     public boolean remove() throws SecurityException {
         return file.delete();
     }
-
 
     @Override
     public boolean mkdirs() {

@@ -27,15 +27,18 @@ repositories {
 ### Add dependency
 ```gradle
 dependencies {
-    def focVersion = '1.2'
+    def focVersion = '1.3'
 
     // all modules
     implementation "com.github.bailuk:foc:$focVersion"
 
-    // foc module
+    // foc (core module)
     // implementation "com.github.bailuk.foc:foc:$focVersion"
 
-    // foc-android module
+    // foc-extended (for accessing java resources)
+    // implementation "com.github.bailuk.foc:foc-android:$focVersion"
+
+    // foc-android (Android Storage Access Framework SAF)
     // implementation "com.github.bailuk.foc:foc-android:$focVersion"
 }
 ```
@@ -105,7 +108,7 @@ public class ExampleActivity extends Activity {
         while ((c = reader.read()) != -1) {
             builder.append((char) c);
         }
-        System.out.println(builder.toString());
+        System.out.println(builder);
     }
 }
 ```

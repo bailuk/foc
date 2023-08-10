@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import ch.bailu.foc.Foc;
+import ch.bailu.foc.util.Check;
 
 public class FocAsset extends Foc {
 
@@ -157,24 +158,6 @@ public class FocAsset extends Foc {
                 children = new String[0];
                 isDirectory.set(false);
             }
-        }
-    }
-
-    private static class Check {
-        private Boolean check = null;
-
-        public void set(boolean b) {
-            if (check == null) {
-                check = b;
-            }
-        }
-
-        public boolean get() {
-            return (check != null && check.booleanValue());
-        }
-
-        public  boolean isSet() {
-            return check != null;
         }
     }
 }
