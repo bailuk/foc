@@ -27,7 +27,7 @@ repositories {
 ### Add dependency
 ```gradle
 dependencies {
-    def focVersion = '1.2'
+    def focVersion = '1.3'
 
     // all modules
     implementation "com.github.bailuk:foc:$focVersion"
@@ -108,7 +108,7 @@ public class ExampleActivity extends Activity {
         while ((c = reader.read()) != -1) {
             builder.append((char) c);
         }
-        System.out.println(builder.toString());
+        System.out.println(builder);
     }
 }
 ```
